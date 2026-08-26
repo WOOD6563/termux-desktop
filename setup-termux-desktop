@@ -1801,13 +1801,24 @@ function exp_vulkan_support() {
 
 	# set gpu api name
 	# shellcheck disable=SC2154
-	case "$exp_termux_vulkan_hw_answer_num" in
-	1) exp_termux_vulkan_hw_answer="vulkan_wrapper_android" ;;
-	2) exp_termux_vulkan_hw_answer="vulkan_wrapper_android_pipetto_crypto" ;;
-	3) exp_termux_vulkan_hw_answer="mesa_freedreno" ;;
-	4) exp_termux_vulkan_hw_answer="freedreno_kgsl" ;;
-	5) exp_termux_vulkan_hw_answer="skip" ;;
-	esac
+	if [[ "$GPU_NAME" == "adreno" ]]; then
+		case "$exp_termux_vulkan_hw_answer_num" in
+		1) exp_termux_vulkan_hw_answer="vulkan_wrapper_android" ;;
+		2) exp_termux_vulkan_hw_answer="vulkan_wrapper_android_leegao" ;;
+		3) exp_termux_vulkan_hw_answer="vulkan_wrapper_android_pipetto_crypto" ;;
+		4) exp_termux_vulkan_hw_answer="mesa_freedreno" ;;
+		5) exp_termux_vulkan_hw_answer="mesa_freedreno_zink" ;;
+		6) exp_termux_vulkan_hw_answer="freedreno_kgsl" ;;
+		7) exp_termux_vulkan_hw_answer="skip" ;;
+		esac
+	else
+		case "$exp_termux_vulkan_hw_answer_num" in
+		1) exp_termux_vulkan_hw_answer="vulkan_wrapper_android" ;;
+		2) exp_termux_vulkan_hw_answer="vulkan_wrapper_android_leegao" ;;
+		3) exp_termux_vulkan_hw_answer="vulkan_wrapper_android_pipetto_crypto" ;;
+		4) exp_termux_vulkan_hw_answer="skip" ;;
+		esac
+	fi
 }
 
 function quetion_termux_hw_answer() {
